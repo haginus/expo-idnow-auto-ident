@@ -1,73 +1,42 @@
-import { useEvent } from 'expo';
-import ExpoIdNowAutoIdent, { ExpoIdNowAutoIdentView } from 'expo-idnow-auto-ident';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import ExpoIdNowAutoIdent from 'expo-idnow-auto-ident';
+import React from 'react';
+import { Button, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
 
 export default function App() {
-  const onChangePayload = useEvent(ExpoIdNowAutoIdent, 'onChange');
+  const [token, setToken] = React.useState('');
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{ExpoIdNowAutoIdent.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{ExpoIdNowAutoIdent.hello()}</Text>
-        </Group>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await ExpoIdNowAutoIdent.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <ExpoIdNowAutoIdentView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
-        </Group>
-      </ScrollView>
+      <Text style={styles.header}>Module API Example</Text>
+      <TextInput
+        placeholder="Enter your token"
+        value={token}
+        onChangeText={setToken}
+        style={styles.input}
+      />
+      <Button
+        title="Start Identification"
+        onPress={() => ExpoIdNowAutoIdent.startIdentification(token)}
+      />
     </SafeAreaView>
   );
 }
 
-function Group(props: { name: string; children: React.ReactNode }) {
-  return (
-    <View style={styles.group}>
-      <Text style={styles.groupHeader}>{props.name}</Text>
-      {props.children}
-    </View>
-  );
-}
-
-const styles = {
+const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     margin: 20,
   },
-  groupHeader: {
-    fontSize: 20,
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
     marginBottom: 20,
-  },
-  group: {
-    margin: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
   },
   container: {
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
   },
-  view: {
-    flex: 1,
-    height: 200,
-  },
-};
+});

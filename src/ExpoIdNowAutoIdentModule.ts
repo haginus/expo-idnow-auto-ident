@@ -1,11 +1,7 @@
 import { NativeModule, requireNativeModule } from 'expo';
 
-import { ExpoIdNowAutoIdentModuleEvents } from './ExpoIdNowAutoIdent.types';
-
-declare class ExpoIdNowAutoIdentModule extends NativeModule<ExpoIdNowAutoIdentModuleEvents> {
-  PI: number;
-  hello(): string;
-  setValueAsync(value: string): Promise<void>;
+declare class ExpoIdNowAutoIdentModule extends NativeModule {
+  startIdentification(token: string): any;
 }
 
 // This call loads the native module object from the JSI.

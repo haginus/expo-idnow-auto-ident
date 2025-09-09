@@ -1,4 +1,7 @@
 import ExpoModulesCore
+import IDNowSDKCore
+import UIKit
+import React
 
 public class ExpoIdNowAutoIdentModule: Module {
   // Each module class must implement the definition function. The definition consists of components
@@ -10,39 +13,21 @@ public class ExpoIdNowAutoIdentModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoIdNowAutoIdent')` in JavaScript.
     Name("ExpoIdNowAutoIdent")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants([
-      "PI": Double.pi
-    ])
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
-    }
-
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
-      ])
-    }
-
-    // Enables the module to be used as a native view. Definition components that are accepted as part of the
-    // view definition: Prop, Events.
-    View(ExpoIdNowAutoIdentView.self) {
-      // Defines a setter for the `url` prop.
-      Prop("url") { (view: ExpoIdNowAutoIdentView, url: URL) in
-        if view.webView.url != url {
-          view.webView.load(URLRequest(url: url))
-        }
+    Function("startIdentification") { (token: String) -> String in
+      DispatchQueue.main.async {
+        let currentViewController = RCTPresentedViewController()
+  
+        IDNowSDK.shared.start(token: token, fromViewController: currentViewController!, listener:{[weak self] (result: IDNowSDK.IdentResult.type, statusCode: IDNowSDK.IdentResult.statusCode, message: String) in
+          print ("SDK finished")
+          if result == .ERROR {
+              let localMessage = NSLocalizedString("idnow.platform.error.generic", comment: "").replacingOccurrences(of: "{errorCode}", with: statusCode.description)
+              print(localMessage)
+              
+          } else if result == .FINISHED {
+          }
+        })
       }
-
-      Events("onLoad")
+      return message
     }
   }
 }
