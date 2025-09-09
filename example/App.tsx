@@ -1,13 +1,22 @@
 import ExpoIdNowAutoIdent from 'expo-idnow-auto-ident';
 import React from 'react';
-import { Button, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
+import { Alert, Button, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
 
 export default function App() {
   const [token, setToken] = React.useState('');
 
+  const startIdentification = async () => {
+    try {
+      const result = await ExpoIdNowAutoIdent.startIdentification(token.toLocaleUpperCase(), 'en');
+      Alert.alert('Identification Result', JSON.stringify(result));
+    } catch (error) {
+      Alert.alert('Error', JSON.stringify(error));
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Module API Example</Text>
+      <Text style={styles.header}>Expo IDnow AutoIdent API Example</Text>
       <TextInput
         placeholder="Enter your token"
         value={token}
@@ -16,7 +25,7 @@ export default function App() {
       />
       <Button
         title="Start Identification"
-        onPress={() => ExpoIdNowAutoIdent.startIdentification(token)}
+        onPress={startIdentification}
       />
     </SafeAreaView>
   );
