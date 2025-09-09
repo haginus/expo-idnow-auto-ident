@@ -13,21 +13,28 @@ public class ExpoIdNowAutoIdentModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoIdNowAutoIdent')` in JavaScript.
     Name("ExpoIdNowAutoIdent")
 
-    Function("startIdentification") { (token: String) -> String in
-      DispatchQueue.main.async {
-        let currentViewController = RCTPresentedViewController()
-  
-        IDNowSDK.shared.start(token: token, fromViewController: currentViewController!, listener:{[weak self] (result: IDNowSDK.IdentResult.type, statusCode: IDNowSDK.IdentResult.statusCode, message: String) in
-          print ("SDK finished")
-          if result == .ERROR {
-              let localMessage = NSLocalizedString("idnow.platform.error.generic", comment: "").replacingOccurrences(of: "{errorCode}", with: statusCode.description)
-              print(localMessage)
-              
-          } else if result == .FINISHED {
-          }
-        })
+    AsyncFunction("startIdentification") { (token: String, preferredLanguage: String?, promise: Promise) in
+      let currentVC = RCTPresentedViewController() 
+
+      IDNowSDK.shared.start(
+        token: token,
+        preferredLanguage: preferredLanguage!,
+        fromViewController: currentVC!
+      ) { result, statusCode, message in
+        if result == .ERROR {
+          promise.resolve([
+            "type": "error",
+            "errorCode": statusCode.description
+          ])
+        } else if result == .FINISHED {
+          promise.resolve([
+            "type": "finished"
+          ])
+        } else {
+          // Handle other result cases if SDK provides them
+          promise.reject("UNKNOWN_RESULT", "Unhandled result type: \(result)")
+        }
       }
-      return message
     }
   }
 }
