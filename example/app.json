@@ -15,10 +15,6 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "expo.modules.idnowautoident.example",
-      "infoPlist": {
-        "NSCameraUsageDescription": "We need access to the camera to verify your identity.",
-        "NSPhotoLibraryUsageDescription": "We need access to the photo library to upload identification documents."
-      },
       "appleTeamId": "J4DVA6QZT9"
     },
     "android": {
@@ -33,7 +29,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "../app.plugin.js"
+      [
+        "../app.plugin.js",
+        {
+          "cameraPermission": "We need access to the camera to verify your identity.",
+          "galleryPermission": "We need access to the photo library to upload identification documents."
+        }
+      ]
     ]
   }
 }

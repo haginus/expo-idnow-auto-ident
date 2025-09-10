@@ -1,6 +1,6 @@
 import { AndroidConfig } from '@expo/config-plugins';
 
-export const withAndroidBuildProperties = AndroidConfig.BuildProperties.createBuildGradlePropsConfigPlugin([
+const withAndroidBuildProperties = AndroidConfig.BuildProperties.createBuildGradlePropsConfigPlugin([
   {
     propName: 'android.extraMavenRepos',
     propValueGetter: (config) => {
@@ -15,3 +15,5 @@ export const withAndroidBuildProperties = AndroidConfig.BuildProperties.createBu
     },
   },
 ]);
+
+export default withAndroidBuildProperties;
