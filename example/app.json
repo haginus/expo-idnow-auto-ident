@@ -33,17 +33,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "../app.plugin.js",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "extraMavenRepos": [
-              "https://raw.githubusercontent.com/idnow/de.idnow.android.sdk/master"
-            ]
-          }
-        }
-      ]
+      "../app.plugin.js"
     ]
   }
 }
