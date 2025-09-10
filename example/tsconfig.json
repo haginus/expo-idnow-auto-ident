@@ -3,8 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "expo-idnow-auto-ident": ["../src/index"],
-      "expo-idnow-auto-ident/*": ["../src/*"]
+      "expo-rn-idnow-auto-ident": ["../src/index"],
+      "expo-rn-idnow-auto-ident/*": ["../src/*"]
     }
   }
 }

@@ -19,7 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'expo-idnow-auto-ident': '..',
+  'expo-rn-idnow-auto-ident': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

@@ -11,7 +11,7 @@ For more information about the IDnow Auto Ident SDK, please refer to the officia
 ## Installation
 
 ```bash
-npm install expo-idnow-auto-ident
+npm install expo-rn-idnow-auto-ident
 ```
 
 ### Configure with Expo
@@ -24,7 +24,7 @@ Just add the plugin to your `app.json` or `app.config.js`:
   "expo": {
     "plugins": [
       [
-        "expo-idnow-auto-ident",
+        "expo-rn-idnow-auto-ident",
         {
           "cameraPermission": "We need access to the camera to verify your identity.",
           "galleryPermission": "We need access to the photo library to upload identification documents.",
@@ -51,7 +51,7 @@ The plugin supports the following options:
 ## Usage
 
 ```typescript
-import ExpoIdNowAutoIdent from 'expo-idnow-auto-ident';
+import ExpoIdNowAutoIdent from 'expo-rn-idnow-auto-ident';
 
 const token = 'xxx-xxxxx';
 const language: string | undefined = 'en';

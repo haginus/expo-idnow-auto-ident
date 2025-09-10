@@ -6,7 +6,7 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['expo-idnow-auto-ident'],
+        dangerouslyAddModulePathsToTranspile: ['expo-rn-idnow-auto-ident'],
       },
     },
     argv

@@ -1,4 +1,4 @@
-import ExpoIdNowAutoIdent from 'expo-idnow-auto-ident';
+import ExpoIdNowAutoIdent from 'expo-rn-idnow-auto-ident';
 import React from 'react';
 import { Alert, Button, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 
