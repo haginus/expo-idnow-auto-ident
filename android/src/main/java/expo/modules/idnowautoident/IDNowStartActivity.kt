@@ -31,7 +31,7 @@ class IDNowActivity : Activity(), IDnowSDK.IDnowResultListener {
     val mapResult =
       when (result.resultType) {
         IDnowResult.ResultType.FINISHED -> mapOf("type" to "finished")
-        IDnowResult.ResultType.CANCELLED -> mapOf("type" to "canceled")
+        IDnowResult.ResultType.CANCELLED -> mapOf("type" to "cancelled")
         IDnowResult.ResultType.ERROR -> mapOf("type" to "error", "errorCode" to result.statusCode)
       }
 

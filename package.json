@@ -1,6 +1,6 @@
 {
   "name": "expo-rn-idnow-auto-ident",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "IDNow / FaceTec SDK wrapper for React Native & Expo",
   "main": "build/index.js",
   "types": "build/index.d.ts",

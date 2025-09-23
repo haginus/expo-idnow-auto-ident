@@ -13,12 +13,12 @@ public class ExpoIdNowAutoIdentModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoIdNowAutoIdent')` in JavaScript.
     Name("ExpoIdNowAutoIdent")
 
-    AsyncFunction("startIdentification") { (token: String, preferredLanguage: String?, promise: Promise) in
+    AsyncFunction("startIdentification") { (token: String, preferredLanguage: String, promise: Promise) in
       let currentVC = RCTPresentedViewController() 
 
       IDNowSDK.shared.start(
         token: token,
-        preferredLanguage: preferredLanguage!,
+        preferredLanguage: preferredLanguage,
         fromViewController: currentVC!
       ) { result, statusCode, message in
         if result == .ERROR {
@@ -29,6 +29,10 @@ public class ExpoIdNowAutoIdentModule: Module {
         } else if result == .FINISHED {
           promise.resolve([
             "type": "finished"
+          ])
+        } else if result == .CANCELLED {
+          promise.resolve([
+            "type": "cancelled"
           ])
         } else {
           // Handle other result cases if SDK provides them

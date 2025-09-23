@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
+  s.dependency 'XS2AiOSNetService'
   s.vendored_frameworks = 'Frameworks/*.xcframework'
 
   # Swift/Objective-C compatibility
